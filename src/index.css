@@ -1,0 +1,48 @@
+:root {
+  line-height: 1.5;
+  font-weight: 400;
+}
+
+*,
+*::after,
+*::before {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  --theme-bg-body: #fff;
+  --theme-primary-color: #242424;
+  --theme-secondary-color: #f4f4f4;
+  --theme-accent-color: #a345e3;
+  --theme-moon-color: #747474;
+  --theme-bg-search-color: #f4f4f4;
+  --theme-heading-color: #808080;
+  --theme-bg-white-color: #ffffff;
+  --theme-toggle-circle: #747474;
+  --theme-bg-divider: hsl(0deg, 0%, 91%);
+  --theme-list-color: #242424;
+  --theme-font-family: serif;
+  --theme-bg-404: #141c2f;
+}
+
+html {
+  font-size: 16px;
+}
+
+body {
+  color: var(--theme-primary-color);
+  background-color: var(--theme-bg-body);
+  font-family: var(--theme-font-family);
+}
+
+img {
+  height: auto;
+  vertical-align: middle;
+}
+
+a {
+  font-weight: 500;
+  text-decoration: none;
+}
