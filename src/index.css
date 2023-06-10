@@ -12,19 +12,16 @@
 }
 
 body {
-  --theme-bg-body: #fff;
-  --theme-primary-color: #242424;
-  --theme-secondary-color: #f4f4f4;
-  --theme-accent-color: #a345e3;
-  --theme-moon-color: #747474;
-  --theme-bg-search-color: #f4f4f4;
-  --theme-heading-color: #808080;
-  --theme-bg-white-color: #ffffff;
-  --theme-toggle-circle: #747474;
-  --theme-bg-divider: hsl(0deg, 0%, 91%);
-  --theme-list-color: #242424;
-  --theme-font-family: serif;
-  --theme-bg-404: #141c2f;
+  --theme-bg-body: #0e0d13;
+  --theme-bg-strength: #18171f;
+  --theme-primary-color: #a4ffaf;
+  --theme-secondary-color: #e5e4eb;
+  --theme-heading-color: #838093;
+  --theme-depth-color: #24232b;
+  --theme-too-weak-color: #f64a4a;
+  --theme-weak-color: #fb7c58;
+  --theme-medium-color: #f8cd65;
+  --theme-font-family: 'JetBrains Mono', monospace;
 }
 
 html {
@@ -32,7 +29,7 @@ html {
 }
 
 body {
-  color: var(--theme-primary-color);
+  color: var(--theme-secondary-color);
   background-color: var(--theme-bg-body);
   font-family: var(--theme-font-family);
 }
