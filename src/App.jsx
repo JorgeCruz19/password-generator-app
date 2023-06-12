@@ -1,25 +1,21 @@
 import { useRef, useState } from 'react'
-import './App.css'
-import CopyIcon from './components/svg/CopyIcon'
+import Checkbox from './components/Checkbox'
+import Range from './components/Range'
+import Header from './components/Header'
+import { CHARACTERS_SET } from './constants'
+import { calculateStrengthPassword, createLevelsBars } from './utils'
 
-const CHARACTERS_SET = {
-  uppercase: ['ABCDEFGHIJKLMNÑOPQRSTUVWXYZ', 26],
-  lowercase: ['abcdefghijklmnñopqrstuvwxyz', 26],
-  numbers: ['0123456789', 10],
-  symbols: ['!@#$%^&*()', 10],
-}
+import './App.css'
 
 const App = () => {
   const [valueRange, setvalueRange] = useState(10)
   const [password, setPassword] = useState('')
-  const [charPool, setCharPool] = useState(0)
-  const [strengthTitle, setStrengthTitle] = useState('Weak')
-
+  const [strengthTitle, setStrengthTitle] = useState('')
   const [characters, setCharacters] = useState({
     uppercase: true,
     lowercase: false,
     numbers: false,
-    symbols: false,
+    symbols: false
   })
   const bars = useRef([])
 
@@ -33,14 +29,14 @@ const App = () => {
 
   const handleGeneratePassword = () => {
     let pass = ''
-    setCharPool(0)
-    let includesSets = []
+    let charPool = 0
+    const includesSets = []
 
     const charactersArray = Object.entries(characters)
     charactersArray.forEach(([character, flag]) => {
       if (flag) {
         includesSets.push(CHARACTERS_SET[character][0])
-        setCharPool((prev) => prev + CHARACTERS_SET[character][1])
+        charPool += CHARACTERS_SET[character][1]
       }
     })
     if (includesSets) {
@@ -53,37 +49,11 @@ const App = () => {
         pass += randChar
       }
 
-      const strength = calculateStrengthPassword(valueRange, charPool)
-      styleLevelsBars(strength)
+      const { strengthTextLevel, strengthLevels } = calculateStrengthPassword(valueRange, charPool)
+      const barsArr = bars.current
+      createLevelsBars(strengthLevels, barsArr)
+      setStrengthTitle(strengthTextLevel)
       setPassword(pass)
-    }
-  }
-
-  const styleLevelsBars = (strength) => {
-    const { strengthTextLevel, strengthLevels } = strength
-    const barsToFill = Array.from(Object.values(bars.current)).slice(0, strengthLevels)
-    setStrengthTitle(strengthTextLevel)
-
-    switch (strengthLevels) {
-      case 1:
-        break
-
-      default:
-        break
-    }
-  }
-
-  const calculateStrengthPassword = (passwordLength, charPoolSize) => {
-    const strength = passwordLength * Math.log2(charPoolSize)
-    console.log(strength)
-    if (strength < 25) {
-      return { strengthTextLevel: 'Too Weak', strengthLevels: 1 }
-    } else if (strength >= 25 && strength < 50) {
-      return { strengthTextLevel: 'Weak', strengthLevels: 2 }
-    } else if (strength >= 50 && strength < 75) {
-      return { strengthTextLevel: 'Medium', strengthLevels: 3 }
-    } else {
-      return { strengthTextLevel: 'Strong', strengthLevels: 4 }
     }
   }
 
@@ -91,82 +61,18 @@ const App = () => {
     <>
       <main className='wrapper-main'>
         <h1 className='password-title'>Password Generator</h1>
-        <header>
-          <input type='text' readOnly value={password} className='password-copy__input' />
-          <CopyIcon />
-        </header>
+        <Header password={password} />
         <section className='wrapper-body'>
           <div className='wrapper-length'>
             <h3 className='password-subtitle'>Character Legth</h3>
             <span className='password-character__length'>{valueRange}</span>
           </div>
-          <input
-            type='range'
-            onChange={handleChangeRange}
-            min='1'
-            defaultValue={10}
-            max='20'
-            className='password-range__input'
-            style={{ backgroundSize: `${valueRange * 5}% 100%` }}
-          />
-
+          <Range handleChangeRange={handleChangeRange} valueRange={valueRange} />
           <div className='wrapper-checkboxs'>
-            <div>
-              <label htmlFor='uppercase' className='password-label'>
-                <input
-                  type='checkbox'
-                  name='uppercase'
-                  checked={characters.uppercase}
-                  onChange={(e) => handleChangeCheckbox('uppercase', e.currentTarget.checked)}
-                  id='uppercase'
-                  className='password-checkbox'
-                />
-                <span className='custom-checkbox' />
-                Include Uppercase Letters
-              </label>
-            </div>
-            <div>
-              <label htmlFor='lowercase' className='password-label'>
-                <input
-                  type='checkbox'
-                  name='lowercase'
-                  checked={characters.lowercase}
-                  id='lowercase'
-                  onChange={(e) => handleChangeCheckbox('lowercase', e.currentTarget.checked)}
-                  className='password-checkbox'
-                />
-                <span className='custom-checkbox' />
-                Include Lowercase Letters
-              </label>
-            </div>
-            <div>
-              <label htmlFor='numbers' className='password-label'>
-                <input
-                  type='checkbox'
-                  name='numbers'
-                  checked={characters.numbers}
-                  id='numbers'
-                  onChange={(e) => handleChangeCheckbox('numbers', e.currentTarget.checked)}
-                  className='password-checkbox'
-                />
-                <span className='custom-checkbox' />
-                Include Numbers
-              </label>
-            </div>
-            <div>
-              <label htmlFor='symbols' className='password-label'>
-                <input
-                  type='checkbox'
-                  name='symbols'
-                  checked={characters.symbols}
-                  id='symbols'
-                  onChange={(e) => handleChangeCheckbox('symbols', e.currentTarget.checked)}
-                  className='password-checkbox'
-                />
-                <span className='custom-checkbox' />
-                Include Symbols
-              </label>
-            </div>
+            <Checkbox handleChangeCheckbox={handleChangeCheckbox} text='Include Uppercase Letters' name='uppercase' checked={characters.uppercase} />
+            <Checkbox handleChangeCheckbox={handleChangeCheckbox} text='Include Lowercase Letters' name='lowercase' checked={characters.lowercase} />
+            <Checkbox handleChangeCheckbox={handleChangeCheckbox} text='Include Numbers' name='numbers' checked={characters.numbers} />
+            <Checkbox handleChangeCheckbox={handleChangeCheckbox} text='Include Symbols' name='symbols' checked={characters.symbols} />
           </div>
           <div className='strength-meter-wrapper'>
             <p className='strength-title'>STRENGTH</p>
