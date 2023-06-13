@@ -16,7 +16,7 @@ React, CSS y HTML
 2. [x] Copy the generated password to the computer's clipboard
 3. [x] See a strength rating for their generated password
 4. [x] View the optimal layout for the interface depending on their device's screen size
-5. [] See hover and focus states for all interactive elements on the page
+5. [x] See hover and focus states for all interactive elements on the page
 
 ### Instructions
 
