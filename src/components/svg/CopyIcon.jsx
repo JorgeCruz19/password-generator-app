@@ -8,8 +8,8 @@ const CopyIcon = ({ handleCopyPassword }) => {
       viewBox='0 0 24 24'
       strokeWidth='1.5'
       stroke='#a4ffaf'
-      width='20'
-      height='20'
+      width='24'
+      height='24'
       className='password-copy'
       onClick={handleCopyPassword}
     >

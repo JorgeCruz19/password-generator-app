@@ -1,7 +1,7 @@
 #root {
   display: grid;
   margin: 0 auto;
-  max-width: 450px;
+  max-width: 500px;
   min-height: 100vh;
   padding: 1rem;
   place-items: center;
@@ -41,6 +41,7 @@
 
 .password-copy:hover {
   transform: scale(1.09);
+  stroke: #fff;
 }
 
 .password-range__input {
@@ -53,7 +54,7 @@
   width: 100%;
 }
 
-input[type='range']::-webkit-slider-thumb {
+.password-range__input::-webkit-slider-thumb {
   -webkit-appearance: none;
   background: var(--theme-secondary-color);
   border-radius: 50%;
@@ -63,7 +64,7 @@ input[type='range']::-webkit-slider-thumb {
   width: 24px;
 }
 
-input[type='range']::-moz-range-thumb {
+.password-range__input::-moz-range-thumb {
   appearance: none;
   background: var(--theme-secondary-color);
   border-radius: 50%;
@@ -74,7 +75,7 @@ input[type='range']::-moz-range-thumb {
   width: 24px;
 }
 
-input[type='range']::-ms-thumb {
+.password-range__input::-ms-thumb {
   appearance: none;
   background: var(--theme-secondary-color);
   border-radius: 50%;
@@ -84,7 +85,22 @@ input[type='range']::-ms-thumb {
   width: 24px;
 }
 
-input[type='range']::-ms-track {
+.password-range__input::-webkit-slider-thumb:hover {
+  background: var(--theme-bg-body);
+  border: 2px solid var(--theme-primary-color);
+}
+
+.password-range__input::-moz-range-thumb:hover {
+  background: var(--theme-bg-body);
+  border: 2px solid var(--theme-primary-color);
+}
+
+.password-range__input::-ms-thumb:hover {
+  background: var(--theme-bg-body);
+  border: 2px solid var(--theme-primary-color);
+}
+
+.password-range__input::-ms-track {
   background: transparent;
   border-color: transparent;
   color: transparent;
@@ -178,6 +194,7 @@ input[type='range']::-ms-track {
 .strength-meter-wrapper {
   background-color: var(--theme-bg-strength);
   margin-bottom: 1.4rem;
+  min-height: 66px;
   padding: 1rem 2rem;
 }
 
@@ -191,7 +208,8 @@ input[type='range']::-ms-track {
 
 .strength-title {
   color: var(--theme-heading-color);
-  font-size: 1.2rem;
+  font-size: 1rem;
+  font-weight: 700;
   text-transform: uppercase;
 }
 
@@ -200,7 +218,7 @@ input[type='range']::-ms-track {
 }
 
 .strength-meter h4 {
-  font-size: 1.2rem;
+  font-size: 1.4rem;
   text-transform: uppercase;
 }
 
@@ -209,7 +227,7 @@ input[type='range']::-ms-track {
   border: 1px solid white;
   height: 1.6rem;
   margin-right: 6px;
-  width: 0.52rem;
+  width: 0.6rem;
 }
 
 .strength-levels span:last-of-type {
@@ -217,14 +235,25 @@ input[type='range']::-ms-track {
 }
 
 .generate-password {
+  align-items: center;
   background-color: var(--theme-primary-color);
-  border: 0;
+  border: 2px solid transparent;
+  column-gap: 0.8rem;
   cursor: pointer;
+  display: flex;
   font-family: var(--theme-font-family);
   font-size: 0.9rem;
   font-weight: 700;
+  justify-content: center;
   outline: 0;
   padding: 1rem 1.5rem;
   text-transform: uppercase;
+  transition: all 0.3s ease;
   width: 100%;
+}
+
+.generate-password:hover {
+  background-color: var(--theme-depth-color);
+  border: 2px solid var(--theme-primary-color);
+  color: var(--theme-primary-color);
 }

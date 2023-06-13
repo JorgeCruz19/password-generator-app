@@ -1,7 +1,9 @@
 import { useRef, useState } from 'react'
+import { ToastContainer } from 'react-toastify'
 import Checkbox from './components/Checkbox'
 import Range from './components/Range'
 import Header from './components/Header'
+import Button from './components/Button'
 import { CHARACTERS_SET } from './constants'
 import { calculateStrengthPassword, createLevelsBars } from './utils'
 
@@ -15,7 +17,7 @@ const App = () => {
     uppercase: true,
     lowercase: false,
     numbers: false,
-    symbols: false
+    symbols: false,
   })
   const bars = useRef([])
 
@@ -64,7 +66,7 @@ const App = () => {
         <Header password={password} />
         <section className='wrapper-body'>
           <div className='wrapper-length'>
-            <h3 className='password-subtitle'>Character Legth</h3>
+            <h3 className='password-subtitle'>Character Length</h3>
             <span className='password-character__length'>{valueRange}</span>
           </div>
           <Range handleChangeRange={handleChangeRange} valueRange={valueRange} />
@@ -86,10 +88,9 @@ const App = () => {
               </div>
             </div>
           </div>
-          <button className='generate-password' onClick={handleGeneratePassword}>
-            Generate
-          </button>
+          <Button text='Generate' handleGeneratePassword={handleGeneratePassword} />
         </section>
+        <ToastContainer />
       </main>
     </>
   )
