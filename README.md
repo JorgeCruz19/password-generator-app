@@ -1,6 +1,6 @@
 # Frontend Mentor Challenge - Password Generator App
 
-![Password Generator](https://repository-images.githubusercontent.com/613633056/98ca3a2f-3375-4df5-99df-1384132c1809)
+![Password Generator](https://repository-images.githubusercontent.com/613633056/84cde6a1-d87a-4281-8c5c-511cbbfe662e)
 
 #### [Live preview ⏮️](https://jorgecruz19.github.io/password-generator-app/)
 
